@@ -20,11 +20,12 @@ $request = new AddOrUpdateCustomer(
         'email@provider.com',
         1622554538,
         [
-             'attributeName'  => 'string|int|boolean only'
+             'attributeName'  => 'string|int|boolean only',
              'name'           => 'string',
              'converted'      => false,
              'type'           => 1,
         ]
+    )
 );
 
 $response = $client->execute($request);

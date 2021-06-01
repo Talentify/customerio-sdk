@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CIO;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 
 class CustomerIoClient
 {
@@ -40,7 +42,7 @@ class CustomerIoClient
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function request(CustomerIoRequest $request) : Response
+    public function request(CustomerIoRequest $request) : ResponseInterface
     {
         return $this->client->request(
             $request->getMethod()->getValue(),
