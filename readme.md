@@ -27,4 +27,12 @@ ___
 - install dependencies `composer install`;
 - run tests `./vendor/bin/phpunit`;
 
+### Improvments roadmap:
+
+- [ ] WTH they use Regions?;
+- [ ] email validation on customer entity;
+- [ ] request exceptions;
+- [ ] simpler response object;
+- [ ] request unit tests;
+- [ ] add phpstan;
 
