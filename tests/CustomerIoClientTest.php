@@ -9,7 +9,7 @@ class CustomerIoClientTest extends TestCase
 {
     public function testInstance()
     {
-        $client = new CustomerIoClient();
+        $client = new CustomerIoClient('siteId', 'apiKey');
 
         $this->assertInstanceOf(CustomerIoClient::class, $client);
     }
