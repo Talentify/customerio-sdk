@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace CIO;
+namespace CIO\Request;
+
+use CIO\Entity\RequestType;
 
 interface CustomerIoRequest
 {
@@ -13,7 +15,7 @@ interface CustomerIoRequest
     public function getRelativePath() : string;
 
     /**
-     * @return \CIO\RequestType http method / request verb
+     * @return \CIO\Entity\RequestType http method / request verb
      */
     public function getMethod() : RequestType;
 

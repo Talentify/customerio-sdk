@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace CIO\Request;
 
-use CIO\CustomerIoRequest;
-use CIO\Entity\Customer;
-use CIO\RequestType;
+use CIO\Request\CustomerIoRequest;
+use CIO\Entity\Customer\Customer;
+use CIO\Entity\RequestType;
 
 class AddOrUpdateCustomer implements CustomerIoRequest
 {
     /**
-     * @var \CIO\Entity\Customer
+     * @var \CIO\Entity\Customer\Customer
      */
     private $customer;
 

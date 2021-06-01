@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CIO;
+namespace CIO\Entity;
 
 use MyCLabs\Enum\Enum;
 

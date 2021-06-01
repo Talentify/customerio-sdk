@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CIO\Entity;
+namespace CIO\Entity\Customer;
 
 class Identifier
 {

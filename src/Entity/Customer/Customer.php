@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace CIO\Entity;
+namespace CIO\Entity\Customer;
+
+use CIO\Entity\Customer\Identifier;
 
 class Customer
 {
     /**
-     * @var \CIO\Entity\Identifier
+     * @var \CIO\Entity\Customer\Identifier
      */
     private $identifier;
     /**
@@ -26,10 +28,10 @@ class Customer
     /**
      * Customer constructor.
      *
-     * @param \CIO\Entity\Identifier $identifier
-     * @param string|null            $email
-     * @param int|null               $createdAt
-     * @param array|null             $attributes
+     * @param \CIO\Entity\Customer\Identifier $identifier
+     * @param string|null                     $email
+     * @param int|null                        $createdAt
+     * @param array|null                      $attributes
      *
      * @throws \Exception
      */
@@ -50,7 +52,7 @@ class Customer
     }
 
     /**
-     * @return \CIO\Entity\Identifier
+     * @return \CIO\Entity\Customer\Identifier
      */
     public function getIdentifier() : Identifier
     {

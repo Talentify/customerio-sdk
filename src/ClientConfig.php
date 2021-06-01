@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace CIO;
 
+use CIO\Entity\AccountRegion;
+
 class ClientConfig
 {
-    const PROTOCOL = 'https';
+    private const PROTOCOL = 'https';
     /**
-     * @var \CIO\AccountRegion
+     * @var \CIO\Entity\AccountRegion
      */
     private $region;
     /**
@@ -27,18 +29,18 @@ class ClientConfig
      * @param string $basePath
      */
     public function __construct(
-        AccountRegion $region,
+        ?AccountRegion $region = null,
         string $version = 'v1',
-        string $basePath = '/api/'
+        string $basePath = '/api'
     ) {
-        $this->region   = $region;
+        $this->region   = $region ?? AccountRegion::US();
         $this->version  = $version;
         $this->basePath = $basePath;
     }
 
     public function getApiBasePath() : string
     {
-        return $this->basePath . $this->version . '/';
+        return $this->basePath . '/' . $this->version . '/';
     }
 
     public function getApiUri() : string
