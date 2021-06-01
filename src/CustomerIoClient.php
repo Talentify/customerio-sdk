@@ -32,17 +32,15 @@ class CustomerIoClient
         $this->apiKey = $apiKey;
         $this->config = $config ?? new ClientConfig(AccountRegion::US());
         $this->client = new Client([
-            'base_uri' => $this->config->getApiUri() . '/' . $this->config->getApiBasePath(),
-            'defaults' => [
-                'auth' => [$this->siteId, $this->apiKey],
-            ],
+            'base_uri' => $this->config->getApiUri() . $this->config->getApiBasePath(),
+            'auth'     => [$this->siteId, $this->apiKey],
         ]);
     }
 
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function request(CustomerIoRequest $request) : ResponseInterface
+    public function execute(CustomerIoRequest $request) : ResponseInterface
     {
         return $this->client->request(
             $request->getMethod()->getValue(),
