@@ -8,7 +8,7 @@ ___
 
 Go and get your workspace credentials at: https://fly.customer.io/settings/api_credentials
 
-```
+``` php
 $client = new CIO\CustomerIoClient(
     'site-id',
     'api-key'
