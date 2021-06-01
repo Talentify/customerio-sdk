@@ -18,9 +18,9 @@ class AddOrUpdateCustomer implements CustomerIoRequest
         $this->customer = $customer;
     }
 
-    public function getPath() : string
+    public function getRelativePath() : string
     {
-        return sprintf('/api/v1/customers/%s', $this->customer->getIdentifier());
+        return sprintf('customers/%s', $this->customer->getIdentifier());
     }
 
     public function getMethod() : RequestType

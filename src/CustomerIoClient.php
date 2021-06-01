@@ -19,12 +19,18 @@ class CustomerIoClient
      * @var \GuzzleHttp\Client
      */
     private $client;
+    /**
+     * @var \CIO\ClientConfig
+     */
+    private $config;
 
-    public function __construct(string $siteId, string $apiKey)
+    public function __construct(string $siteId, string $apiKey, ClientConfig $config)
     {
         $this->siteId = $siteId;
         $this->apiKey = $apiKey;
+        $this->config = $config ?? new ClientConfig(AccountRegion::US());
         $this->client = new Client([
+            'base_uri' => $this->config->getApiUri() . '/' . $this->config->getApiBasePath(),
             'defaults' => [
                 'auth' => [$this->siteId, $this->apiKey],
             ],
@@ -38,7 +44,7 @@ class CustomerIoClient
     {
         return $this->client->request(
             $request->getMethod()->getValue(),
-            $request->getPath(),
+            $request->getRelativePath(),
             [
                 'json' => $request->getBody(),
             ]

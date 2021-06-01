@@ -1,35 +1,43 @@
 # Customer.io PHP Client
+
 A basic php client for use customer.io.
 
-
 ## Usage
-___
-
 
 Go and get your workspace credentials at: https://fly.customer.io/settings/api_credentials
 
 ``` php
-$client = new CIO\CustomerIoClient(
+$client = new CustomerIoClient(
     'site-id',
-    'api-key'
+    'api-key',
+    new ClientConfig(AccountRegion::US());
 )
 
 // instance your request with his requeriments (generally entities from CIO\Entity namespace)
-$request = new CIO\Request\ExampleRequest($requirements);
-$response = $client->execute($request);
+$request = new AddOrUpdateCustomer(
+    new Customer(
+        new Identifier(123),
+        'email@provider.com',
+        1622554538,
+        [
+             'attributeName'  => 'string|int|boolean only'
+             'name'           => 'string',
+             'converted'      => 'boolean',
+             'type'           => 1,
+        ]
+);
 
+$response = $client->execute($request);
 echo $response->getStatusCode(); // 200 (I'm cheatting its a guzzle response) 
 ```
 
 ## Dev
-___
 
 - install dependencies `composer install`;
 - run tests `./vendor/bin/phpunit`;
 
 ### Improvments roadmap:
 
-- [ ] WTH they use Regions?;
 - [ ] email validation on customer entity;
 - [ ] request exceptions;
 - [ ] simpler response object;
