@@ -3,6 +3,7 @@
 namespace CIO;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
 
 class CustomerIoClient
 {
@@ -33,9 +34,9 @@ class CustomerIoClient
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function request(CustomerIoRequest $request)
+    public function request(CustomerIoRequest $request) : Response
     {
-        $this->client->request(
+        return $this->client->request(
             $request->getMethod()->getValue(),
             $request->getPath(),
             [

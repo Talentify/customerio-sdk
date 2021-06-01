@@ -6,6 +6,9 @@ use MyCLabs\Enum\Enum;
 
 /**
  * @method static static PUT()
+ * @method static static POST()
+ * @method static static DELETE()
+ * @method static static GET()
  */
 class RequestType extends Enum
 {
