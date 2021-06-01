@@ -2,7 +2,7 @@
 
 A basic php client for use customer.io.
 
-## Usage
+## QuickStart
 
 Go and get your workspace credentials at: https://fly.customer.io/settings/api_credentials
 
@@ -22,7 +22,7 @@ $request = new AddOrUpdateCustomer(
         [
              'attributeName'  => 'string|int|boolean only'
              'name'           => 'string',
-             'converted'      => 'boolean',
+             'converted'      => false,
              'type'           => 1,
         ]
 );
@@ -42,5 +42,6 @@ echo $response->getStatusCode(); // 200 (I'm cheatting its a guzzle response)
 - [ ] request exceptions;
 - [ ] simpler response object;
 - [ ] request unit tests;
+- [ ] add facade;
 - [ ] add phpstan;
 
