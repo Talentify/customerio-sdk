@@ -6,9 +6,10 @@ namespace CIO;
 
 use CIO\Entity\AccountRegion;
 use CIO\Request\CustomerIoRequest;
+use CIO\Response\BaseResponse;
+use CIO\Response\CustomerIoResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
-use Psr\Http\Message\ResponseInterface;
 
 class CustomerIoClient
 {
@@ -34,7 +35,8 @@ class CustomerIoClient
         string $apiKey,
         ?ClientConfig $config = null,
         ?ClientInterface $client = null
-    ) {
+    )
+    {
         $this->siteId = $siteId;
         $this->apiKey = $apiKey;
         $this->config = $config ?? new ClientConfig(AccountRegion::US());
@@ -44,25 +46,27 @@ class CustomerIoClient
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function execute(CustomerIoRequest $request) : ResponseInterface
+    public function execute(CustomerIoRequest $request): CustomerIoResponse
     {
-        return $this->client->request(
+        $httpResponse = $this->client->request(
             $request->getMethod()->getValue(),
             $request->getRelativePath(),
             [
                 'json' => $request->getBody(),
             ] + $this->getDefaults()
         );
+
+        return new BaseResponse($httpResponse->getBody()->getContents());
     }
 
     /**
      * @return array
      */
-    private function getDefaults() : array
+    private function getDefaults(): array
     {
         return [
             'base_uri' => $this->config->getApiUri() . $this->config->getApiBasePath(),
-            'auth'     => [$this->siteId, $this->apiKey],
+            'auth' => [$this->siteId, $this->apiKey],
         ];
     }
 }
