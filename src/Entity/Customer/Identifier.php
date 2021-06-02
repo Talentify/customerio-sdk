@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace CIO\Entity\Customer;
 
+
+use CIO\Exception\InvalidEmail;
+
 class Identifier
 {
     /**
@@ -22,11 +25,20 @@ class Identifier
      * Identifier constructor.
      *
      * @param string|int $id
+     * @throws InvalidEmail
      */
-    public function __construct($id, bool $isEmail = false)
+    public function __construct($id)
     {
-        $this->id      = $id;
-        $this->isEmail = $isEmail;
+        $this->isEmail = false;
+
+        if (!ctype_digit($id)){
+            if ($this->validateEmail($id)) {
+                $this->isEmail = true;
+            } else {
+                throw new InvalidEmail();
+            }
+        }
+        $this->id = $id;
     }
 
     /**
@@ -40,7 +52,7 @@ class Identifier
     /**
      * @return false
      */
-    public function isEmail() : bool
+    public function isEmail(): bool
     {
         return $this->isEmail;
     }
@@ -48,5 +60,10 @@ class Identifier
     public function __toString()
     {
         return (string)$this->getId();
+    }
+
+    public function validateEmail($email): bool
+    {
+        return (bool)filter_var($email,FILTER_VALIDATE_EMAIL);
     }
 }
