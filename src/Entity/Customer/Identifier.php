@@ -31,7 +31,7 @@ class Identifier
     {
         $this->isEmail = false;
 
-        if (!ctype_digit($id)){
+        if (!ctype_digit((string)$id)){
             if ($this->validateEmail($id)) {
                 $this->isEmail = true;
             } else {
@@ -41,17 +41,11 @@ class Identifier
         $this->id = $id;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getId()
+    public function getId(): string
     {
-        return $this->id;
+        return (string)$this->id;
     }
 
-    /**
-     * @return false
-     */
     public function isEmail(): bool
     {
         return $this->isEmail;
@@ -62,7 +56,7 @@ class Identifier
         return (string)$this->getId();
     }
 
-    public function validateEmail($email): bool
+    private function validateEmail($email): bool
     {
         return (bool)filter_var($email,FILTER_VALIDATE_EMAIL);
     }
