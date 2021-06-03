@@ -12,6 +12,6 @@ use MyCLabs\Enum\Enum;
  */
 class AccountRegion extends Enum
 {
-    public const US = 'track.customer.io';
-    public const EU = 'track-eu.customer.io';
+    public const US = 1;
+    public const EU = 2;
 }

@@ -4,50 +4,42 @@ declare(strict_types=1);
 
 namespace CIO;
 
-use CIO\Api\Track;
+use CIO\HttpClient\GuzzleHttpClient;
+use CIO\HttpClient\HttpClientInterface;
 use CIO\Entity\AccountRegion;
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
+use CIO\Request\CustomerIoRequest;
 
 class CustomerIoClient
 {
     /**
      * @var string
      */
-    private $siteId;
-    /**
-     * @var string
-     */
-    private $apiKey;
+    private $token;
     /**
      * @var AccountRegion
      */
     private $region;
     /**
-     * @var \GuzzleHttp\Client
+     * @var HttpClientInterface
      */
-    private $client;
-    /**
-     * @var Track
-     */
-    private $track;
+    private $httpClient;
 
     public function __construct(
-        string $siteId,
-        string $apiKey,
+        string $token,
         ?AccountRegion $accountRegion = null,
-        ?ClientInterface $client = null
+        ?HttpClientInterface $client = null
     ) {
-        $this->siteId = $siteId;
-        $this->apiKey = $apiKey;
+        $this->token  = $token;
         $this->region = $accountRegion ?? AccountRegion::US();
-        $this->client = $client ?? new Client();
-        $this->track  = new Track($this->region, [$this->siteId, $this->apiKey], $this->client);
+        $this->httpClient = $client ?? new GuzzleHttpClient($this->token);
     }
 
-    public function track() : Track
+    public function request(CustomerIoRequest $request)
     {
-        //Talvez instanciar sempre que for chamado?
-        return $this->track;
+        $this->httpClient->request(
+            $request->getMethod()->getValue(),
+            $request->getApiDomain($this->region) . $request->getEndpoint(),
+            $request->getBody()
+        );
     }
 }
