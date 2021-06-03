@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace CIO\Entity\Customer;
 
-use CIO\Entity\Customer\Identifier;
-
 class Customer
 {
     /**
@@ -41,12 +39,8 @@ class Customer
         ?int $createdAt = null,
         ?array $attributes = []
     ) {
-        if (!$identifier->isEmail() && is_null($email)) {
-            throw new \Exception('A Customer should have an email or an identifier of type email');
-        }
-
         $this->identifier = $identifier;
-        $this->email      = $email; // todo - validate email
+        $this->email      = $email;
         $this->createdAt  = $createdAt;
         $this->attributes = $attributes;
     }

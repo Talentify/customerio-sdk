@@ -53,10 +53,10 @@ class Identifier
 
     public function __toString()
     {
-        return (string)$this->getId();
+        return $this->getId();
     }
 
-    private function validateEmail($email): bool
+    private function validateEmail(string $email): bool
     {
         return (bool)filter_var($email,FILTER_VALIDATE_EMAIL);
     }
