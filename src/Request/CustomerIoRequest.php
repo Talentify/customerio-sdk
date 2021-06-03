@@ -12,7 +12,7 @@ interface CustomerIoRequest
      * @return string the relative path to the endpoint, without leading slash. eg: 'customer', wrong: '/customer',
      *                'api/v1/customer'
      */
-    public function getRelativePath() : string;
+    public function getEndpoint() : string;
 
     /**
      * @return \CIO\Entity\RequestType http method / request verb

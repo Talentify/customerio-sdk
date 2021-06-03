@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace CIO\Request;
+namespace CIO\Request\Track\Customer;
 
-use CIO\Request\CustomerIoRequest;
 use CIO\Entity\Customer\Customer;
 use CIO\Entity\RequestType;
+use CIO\Request\CustomerIoRequest;
 
 class AddOrUpdateCustomer implements CustomerIoRequest
 {
@@ -20,9 +20,9 @@ class AddOrUpdateCustomer implements CustomerIoRequest
         $this->customer = $customer;
     }
 
-    public function getRelativePath() : string
+    public function getEndpoint() : string
     {
-        return sprintf('customers/%s', $this->customer->getIdentifier());
+        return sprintf('%s', $this->customer->getIdentifier());
     }
 
     public function getMethod() : RequestType

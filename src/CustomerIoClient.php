@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace CIO;
 
+use CIO\Api\Track;
 use CIO\Entity\AccountRegion;
-use CIO\Request\CustomerIoRequest;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
-use Psr\Http\Message\ResponseInterface;
 
 class CustomerIoClient
 {
@@ -21,48 +20,34 @@ class CustomerIoClient
      */
     private $apiKey;
     /**
+     * @var AccountRegion
+     */
+    private $region;
+    /**
      * @var \GuzzleHttp\Client
      */
     private $client;
     /**
-     * @var \CIO\ClientConfig
+     * @var Track
      */
-    private $config;
+    private $track;
 
     public function __construct(
         string $siteId,
         string $apiKey,
-        ?ClientConfig $config = null,
+        ?AccountRegion $accountRegion = null,
         ?ClientInterface $client = null
     ) {
         $this->siteId = $siteId;
         $this->apiKey = $apiKey;
-        $this->config = $config ?? new ClientConfig(AccountRegion::US());
+        $this->region = $accountRegion ?? AccountRegion::US();
         $this->client = $client ?? new Client();
+        $this->track  = new Track($this->region, [$this->siteId, $this->apiKey], $this->client);
     }
 
-    /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function execute(CustomerIoRequest $request) : ResponseInterface
+    public function track() : Track
     {
-        return $this->client->request(
-            $request->getMethod()->getValue(),
-            $request->getRelativePath(),
-            [
-                'json' => $request->getBody(),
-            ] + $this->getDefaults()
-        );
-    }
-
-    /**
-     * @return array
-     */
-    private function getDefaults() : array
-    {
-        return [
-            'base_uri' => $this->config->getApiUri() . $this->config->getApiBasePath(),
-            'auth'     => [$this->siteId, $this->apiKey],
-        ];
+        //Talvez instanciar sempre que for chamado?
+        return $this->track;
     }
 }
