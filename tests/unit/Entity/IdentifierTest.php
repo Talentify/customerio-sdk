@@ -11,6 +11,7 @@ class IdentifierTest extends TestCase
 {
     public function testIdNumber()
     {
+        $this->assertTrue(false);
         $identifier = new Identifier("123");
         $this->assertEquals("123", $identifier->getId());
         $this->assertFalse($identifier->isEmail());
