@@ -29,20 +29,17 @@ $request = new AddOrUpdateCustomer(
 );
 
 $response = $client->execute($request);
-echo $response->getStatusCode(); // 200 (I'm cheatting its a guzzle response) 
+echo $response->getStatusCode(); // 200 (I'm cheatting its a guzzle response)
 ```
 
 ## Dev
 
-- install dependencies `composer install`;
-- run tests `./vendor/bin/phpunit`;
+- install dependencies `docker-compose run php composer install`;
+- run tests `docker-compose run php ./vendor/bin/phpunit`;
 
 ### Improvments roadmap:
 
-- [ ] email validation on customer entity;
 - [ ] request exceptions;
-- [ ] simpler response object;
 - [ ] request unit tests;
-- [ ] add facade;
 - [ ] add phpstan;
 
