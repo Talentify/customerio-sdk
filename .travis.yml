@@ -1,0 +1,8 @@
+language: php
+
+services:
+  - docker
+
+script:
+  - docker-compose run php composer install
+  - docker-compose run php ./vendor/bin/phpunit
