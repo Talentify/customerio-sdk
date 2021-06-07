@@ -26,7 +26,7 @@ interface CustomerIoRequest
     public function getMethod() : RequestMethod;
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getBody() : array;
 }

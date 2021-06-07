@@ -9,5 +9,8 @@ use CIO\Response\CustomerIoResponse;
 
 interface HttpClientInterface
 {
+    /**
+     * @param mixed[] $body
+     */
     public function request(RequestMethod $method, string $uri, array $body = []) : CustomerIoResponse;
 }

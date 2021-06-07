@@ -7,8 +7,8 @@ namespace CIO\Entity;
 use MyCLabs\Enum\Enum;
 
 /**
- * @method static US()
- * @method static EU()
+ * @method static self US()
+ * @method static self EU()
  */
 class AccountRegion extends Enum
 {
