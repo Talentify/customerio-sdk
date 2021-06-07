@@ -3,6 +3,8 @@
 namespace CIO\HttpClient;
 
 use CIO\Entity\RequestMethod;
+use CIO\Response\BaseResponse;
+use CIO\Response\CustomerIoResponse;
 use GuzzleHttp\Client;
 
 class GuzzleHttpClient implements HttpClientInterface
@@ -24,14 +26,16 @@ class GuzzleHttpClient implements HttpClientInterface
         );
     }
 
-    public function request(RequestMethod $method, string $uri, array $body = [])
+    public function request(RequestMethod $method, string $uri, array $body = []) : CustomerIoResponse
     {
-        $this->guzzleClient->request(
+        $response = $this->guzzleClient->request(
             $method,
             self::PROTOCOL . $uri,
             [
                 'json' => $body,
             ]
         );
+
+        return new BaseResponse($response->getBody()->getContents());
     }
 }
