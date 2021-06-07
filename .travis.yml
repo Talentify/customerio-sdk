@@ -9,4 +9,5 @@ install:
   - travis_retry composer install --prefer-dist --no-interaction
 
 script:
+  - vendor/bin/phpstan analyse src
   - vendor/bin/phpunit
