@@ -1,8 +1,12 @@
 language: php
 
-services:
-  - docker
+php:
+  - 7.3
+  - 7.4
+
+install:
+  - composer self-update
+  - travis_retry composer install --prefer-dist --no-interaction
 
 script:
-  - docker-compose run php composer install
-  - docker-compose run php ./vendor/bin/phpunit
+  - vendor/bin/phpunit
