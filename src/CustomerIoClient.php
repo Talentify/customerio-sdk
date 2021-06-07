@@ -8,6 +8,8 @@ use CIO\HttpClient\GuzzleHttpClient;
 use CIO\HttpClient\HttpClientInterface;
 use CIO\Entity\AccountRegion;
 use CIO\Request\CustomerIoRequest;
+use CIO\Response\BaseResponse;
+use CIO\Response\CustomerIoResponse;
 
 class CustomerIoClient
 {
@@ -34,12 +36,14 @@ class CustomerIoClient
         $this->httpClient = $client ?? new GuzzleHttpClient($this->token);
     }
 
-    public function request(CustomerIoRequest $request)
+    public function request(CustomerIoRequest $request) : CustomerIoResponse
     {
-        $this->httpClient->request(
+        $httpResponse = $this->httpClient->request(
             $request->getMethod()->getValue(),
             $request->getApiDomain($this->region) . $request->getEndpoint(),
             $request->getBody()
         );
+
+        return new BaseResponse($httpResponse->getBody()->getContents());
     }
 }
