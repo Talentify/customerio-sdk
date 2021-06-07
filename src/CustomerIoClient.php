@@ -35,10 +35,10 @@ class CustomerIoClient
         $this->httpClient = $client ?? new GuzzleHttpClient($this->token);
     }
 
-    public function request(CustomerIoRequest $request) : CustomerIoResponse
+    public function execute(CustomerIoRequest $request) : CustomerIoResponse
     {
         return $this->httpClient->request(
-            $request->getMethod()->getValue(),
+            $request->getMethod(),
             $request->getApiDomain($this->region) . $request->getEndpoint(),
             $request->getBody()
         );

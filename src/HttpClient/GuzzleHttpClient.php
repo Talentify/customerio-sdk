@@ -29,7 +29,7 @@ class GuzzleHttpClient implements HttpClientInterface
     public function request(RequestMethod $method, string $uri, array $body = []) : CustomerIoResponse
     {
         $response = $this->guzzleClient->request(
-            $method,
+            $method->getValue(),
             self::PROTOCOL . $uri,
             [
                 'json' => $body,
