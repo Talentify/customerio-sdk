@@ -15,7 +15,7 @@ abstract class TrackBaseRequest implements CustomerIoRequest
      */
     public function getApiDomain(AccountRegion $region) : string
     {
-        switch ($region) {
+        switch ($region->getValue()) {
             case AccountRegion::US:
                 return "track.customer.io";
             case AccountRegion::EU:
