@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CIO\Entity\Customer;
 
-use CIO\Entity\Customer\Identifier;
+use CIO\Exception\InvalidEmail;
 
 class Customer
 {
@@ -41,12 +41,16 @@ class Customer
         ?int $createdAt = null,
         ?array $attributes = []
     ) {
-        if (!$identifier->isEmail() && is_null($email)) {
-            throw new \Exception('A Customer should have an email or an identifier of type email');
+        if ($identifier->isEmail() && !is_null($email)) {
+            throw new InvalidEmail("The email should be null when an identifier is an email");
+        }
+
+        if (!is_null($email) && !$this->isValidEmail($email)) {
+            throw new InvalidEmail();
         }
 
         $this->identifier = $identifier;
-        $this->email      = $email; // todo - validate email
+        $this->email      = $email;
         $this->createdAt  = $createdAt;
         $this->attributes = $attributes;
     }
@@ -100,5 +104,14 @@ class Customer
         }
 
         return $customer;
+    }
+
+    private function isValidEmail(?string $email) : bool
+    {
+        if (is_null($email)) {
+            return false;
+        }
+
+        return (bool)filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 }
