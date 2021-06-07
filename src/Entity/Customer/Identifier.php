@@ -4,49 +4,38 @@ declare(strict_types=1);
 
 namespace CIO\Entity\Customer;
 
+
 class Identifier
 {
     /**
-     * should be an int or an email address
+     * should be a string or an email address
      *
-     * @var int|string
+     * @var string
      */
     private $id;
 
     /**
-     * @var bool
-     */
-    private $isEmail;
-
-    /**
      * Identifier constructor.
      *
-     * @param string|int $id
+     * @param string $id
      */
-    public function __construct($id, bool $isEmail = false)
+    public function __construct(string $id)
     {
-        $this->id      = $id;
-        $this->isEmail = $isEmail;
+        $this->id = $id;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getId()
+    public function getId(): string
     {
-        return $this->id;
+        return (string)$this->id;
     }
 
-    /**
-     * @return false
-     */
-    public function isEmail() : bool
+    public function isEmail(): bool
     {
-        return $this->isEmail;
+        return (bool)filter_var($this->id,FILTER_VALIDATE_EMAIL);
     }
 
     public function __toString()
     {
-        return (string)$this->getId();
+        return $this->getId();
     }
 }
