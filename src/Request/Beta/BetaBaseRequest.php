@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace CIO\Request\Track;
+namespace CIO\Request\Beta;
 
 use CIO\Entity\AccountRegion;
 use CIO\Entity\AuthType;
 use CIO\Exception\NotImplemented;
 use CIO\Request\CustomerIoRequest;
 
-abstract class TrackBaseRequest implements CustomerIoRequest
+abstract class BetaBaseRequest implements CustomerIoRequest
 {
     /**
      * @throws \CIO\Exception\NotImplemented
@@ -18,9 +18,9 @@ abstract class TrackBaseRequest implements CustomerIoRequest
     {
         switch ($region->getValue()) {
             case AccountRegion::US:
-                return "track.customer.io";
+                return "beta-api.customer.io";
             case AccountRegion::EU:
-                return "track-eu.customer.io";
+                return "beta-api-eu.customer.io";
             default:
                 throw new NotImplemented();
         }
@@ -28,6 +28,6 @@ abstract class TrackBaseRequest implements CustomerIoRequest
 
     public function getAuthType() : AuthType
     {
-        return AuthType::BASIC();
+        return AuthType::BEARER();
     }
 }

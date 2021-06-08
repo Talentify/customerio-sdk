@@ -7,10 +7,10 @@ namespace CIO\Entity;
 use MyCLabs\Enum\Enum;
 
 /**
- * @method static static PUT()
- * @method static static POST()
- * @method static static DELETE()
- * @method static static GET()
+ * @method static self PUT()
+ * @method static self POST()
+ * @method static self DELETE()
+ * @method static self GET()
  */
 class RequestMethod extends Enum
 {

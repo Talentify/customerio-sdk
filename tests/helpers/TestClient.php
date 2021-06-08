@@ -2,6 +2,7 @@
 
 namespace Helpers;
 
+use CIO\Entity\AuthType;
 use CIO\Entity\RequestMethod;
 use CIO\HttpClient\HttpClientInterface;
 use CIO\Response\BaseResponse;
@@ -13,15 +14,19 @@ class TestClient implements HttpClientInterface
 
     private $container = [];
 
-    public function request(RequestMethod $method, string $uri, array $body = []) : CustomerIoResponse
-    {
+    public function request(
+        RequestMethod $method,
+        string $uri,
+        AuthType $authType,
+        array $body = []
+    ) : CustomerIoResponse {
         $this->container[] = [
             'method' => $method,
             'uri'    => self::PROTOCOL . $uri,
             'body'   => $body,
         ];
 
-        return new BaseResponse('{}');
+        return new BaseResponse(200, '{}');
     }
 
     public function getRequestsExecuted() : array
