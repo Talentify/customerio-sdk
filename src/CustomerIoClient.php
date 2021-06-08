@@ -13,10 +13,6 @@ use CIO\Response\CustomerIoResponse;
 class CustomerIoClient
 {
     /**
-     * @var string
-     */
-    private $token;
-    /**
      * @var AccountRegion
      */
     private $region;
@@ -25,14 +21,18 @@ class CustomerIoClient
      */
     private $httpClient;
 
+    /**
+     * @param mixed[] $credentials
+     *
+     * @throws \CIO\Exception\InvalidCredentials
+     */
     public function __construct(
-        string $token,
+        array $credentials,
         ?AccountRegion $accountRegion = null,
         ?HttpClientInterface $client = null
     ) {
-        $this->token  = $token;
-        $this->region = $accountRegion ?? AccountRegion::US();
-        $this->httpClient = $client ?? new GuzzleHttpClient($this->token);
+        $this->region     = $accountRegion ?? AccountRegion::US();
+        $this->httpClient = $client ?? new GuzzleHttpClient($credentials);
     }
 
     public function execute(CustomerIoRequest $request) : CustomerIoResponse

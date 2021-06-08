@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace CIO\Request\Track;
 
 use CIO\Entity\AccountRegion;
-use CIO\Exception\NotImplementedException;
+use CIO\Exception\NotImplemented;
 use CIO\Request\CustomerIoRequest;
 
 abstract class TrackBaseRequest implements CustomerIoRequest
 {
     /**
-     * @throws \CIO\Exception\NotImplementedException
+     * @throws \CIO\Exception\NotImplemented
      */
     public function getApiDomain(AccountRegion $region) : string
     {
@@ -21,7 +21,7 @@ abstract class TrackBaseRequest implements CustomerIoRequest
             case AccountRegion::EU:
                 return "track-eu.customer.io";
             default:
-                throw new NotImplementedException();
+                throw new NotImplemented();
         }
     }
 }
