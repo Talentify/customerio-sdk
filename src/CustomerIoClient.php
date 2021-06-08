@@ -40,6 +40,7 @@ class CustomerIoClient
         return $this->httpClient->request(
             $request->getMethod(),
             $request->getApiDomain($this->region) . $request->getEndpoint(),
+            $request->getAuthType(),
             $request->getBody()
         );
     }

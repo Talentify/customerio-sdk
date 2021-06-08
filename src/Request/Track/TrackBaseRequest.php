@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CIO\Request\Track;
 
 use CIO\Entity\AccountRegion;
+use CIO\Entity\AuthType;
 use CIO\Exception\NotImplemented;
 use CIO\Request\CustomerIoRequest;
 
@@ -23,5 +24,10 @@ abstract class TrackBaseRequest implements CustomerIoRequest
             default:
                 throw new NotImplemented();
         }
+    }
+
+    public function getAuthType() : AuthType
+    {
+        return AuthType::BASIC();
     }
 }
