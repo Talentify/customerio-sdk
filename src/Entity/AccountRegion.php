@@ -7,11 +7,11 @@ namespace CIO\Entity;
 use MyCLabs\Enum\Enum;
 
 /**
- * @method static US()
- * @method static EU()
+ * @method static self US()
+ * @method static self EU()
  */
 class AccountRegion extends Enum
 {
-    public const US = 'track.customer.io';
-    public const EU = 'track-eu.customer.io';
+    public const US = 1;
+    public const EU = 2;
 }

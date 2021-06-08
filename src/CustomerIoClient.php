@@ -4,69 +4,43 @@ declare(strict_types=1);
 
 namespace CIO;
 
+use CIO\HttpClient\GuzzleHttpClient;
+use CIO\HttpClient\HttpClientInterface;
 use CIO\Entity\AccountRegion;
 use CIO\Request\CustomerIoRequest;
-use CIO\Response\BaseResponse;
 use CIO\Response\CustomerIoResponse;
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 
 class CustomerIoClient
 {
     /**
      * @var string
      */
-    private $siteId;
+    private $token;
     /**
-     * @var string
+     * @var AccountRegion
      */
-    private $apiKey;
+    private $region;
     /**
-     * @var \GuzzleHttp\Client
+     * @var HttpClientInterface
      */
-    private $client;
-    /**
-     * @var \CIO\ClientConfig
-     */
-    private $config;
+    private $httpClient;
 
     public function __construct(
-        string $siteId,
-        string $apiKey,
-        ?ClientConfig $config = null,
-        ?ClientInterface $client = null
-    )
-    {
-        $this->siteId = $siteId;
-        $this->apiKey = $apiKey;
-        $this->config = $config ?? new ClientConfig(AccountRegion::US());
-        $this->client = $client ?? new Client();
+        string $token,
+        ?AccountRegion $accountRegion = null,
+        ?HttpClientInterface $client = null
+    ) {
+        $this->token  = $token;
+        $this->region = $accountRegion ?? AccountRegion::US();
+        $this->httpClient = $client ?? new GuzzleHttpClient($this->token);
     }
 
-    /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function execute(CustomerIoRequest $request): CustomerIoResponse
+    public function execute(CustomerIoRequest $request) : CustomerIoResponse
     {
-        $httpResponse = $this->client->request(
-            $request->getMethod()->getValue(),
-            $request->getRelativePath(),
-            [
-                'json' => $request->getBody(),
-            ] + $this->getDefaults()
+        return $this->httpClient->request(
+            $request->getMethod(),
+            $request->getApiDomain($this->region) . $request->getEndpoint(),
+            $request->getBody()
         );
-
-        return new BaseResponse($httpResponse->getBody()->getContents());
-    }
-
-    /**
-     * @return array
-     */
-    private function getDefaults(): array
-    {
-        return [
-            'base_uri' => $this->config->getApiUri() . $this->config->getApiBasePath(),
-            'auth' => [$this->siteId, $this->apiKey],
-        ];
     }
 }

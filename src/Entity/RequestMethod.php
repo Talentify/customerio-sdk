@@ -12,7 +12,7 @@ use MyCLabs\Enum\Enum;
  * @method static static DELETE()
  * @method static static GET()
  */
-class RequestType extends Enum
+class RequestMethod extends Enum
 {
     const GET    = 'GET';
     const POST   = 'POST';

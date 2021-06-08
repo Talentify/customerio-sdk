@@ -4,23 +4,29 @@ declare(strict_types=1);
 
 namespace CIO\Request;
 
-use CIO\Entity\RequestType;
+use CIO\Entity\AccountRegion;
+use CIO\Entity\RequestMethod;
 
 interface CustomerIoRequest
 {
     /**
+     * @return string the domain of the api eg: 'track.customer.io'
+     */
+    public function getApiDomain(AccountRegion $region) : string;
+
+    /**
      * @return string the relative path to the endpoint, without leading slash. eg: 'customer', wrong: '/customer',
      *                'api/v1/customer'
      */
-    public function getRelativePath() : string;
+    public function getEndpoint() : string;
 
     /**
-     * @return \CIO\Entity\RequestType http method / request verb
+     * @return \CIO\Entity\RequestMethod http method / request verb
      */
-    public function getMethod() : RequestType;
+    public function getMethod() : RequestMethod;
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getBody() : array;
 }

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace CIO\Request;
+namespace CIO\Request\Track\Customer;
 
-use CIO\Request\CustomerIoRequest;
 use CIO\Entity\Customer\Customer;
-use CIO\Entity\RequestType;
+use CIO\Entity\RequestMethod;
+use CIO\Request\Track\TrackBaseRequest;
 
-class AddOrUpdateCustomer implements CustomerIoRequest
+class AddOrUpdateCustomer extends TrackBaseRequest
 {
     /**
      * @var \CIO\Entity\Customer\Customer
@@ -20,14 +20,14 @@ class AddOrUpdateCustomer implements CustomerIoRequest
         $this->customer = $customer;
     }
 
-    public function getRelativePath() : string
+    public function getEndpoint() : string
     {
-        return sprintf('customers/%s', $this->customer->getIdentifier());
+        return sprintf('/api/v1/customers/%s', $this->customer->getIdentifier());
     }
 
-    public function getMethod() : RequestType
+    public function getMethod() : RequestMethod
     {
-        return RequestType::PUT();
+        return RequestMethod::PUT();
     }
 
     public function getBody() : array

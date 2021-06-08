@@ -21,7 +21,7 @@ class Customer
      */
     private $createdAt;
     /**
-     * @var array
+     * @var mixed[]|null
      */
     private $attributes;
 
@@ -31,7 +31,7 @@ class Customer
      * @param \CIO\Entity\Customer\Identifier $identifier
      * @param string|null                     $email
      * @param int|null                        $createdAt
-     * @param array|null                      $attributes
+     * @param mixed[]|null                     $attributes
      *
      * @throws \Exception
      */
@@ -63,17 +63,11 @@ class Customer
         return $this->identifier;
     }
 
-    /**
-     * @return mixed
-     */
     public function getEmail() : ?string
     {
         return $this->email;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCreatedAt() : ?int
     {
         return $this->createdAt;
@@ -87,6 +81,9 @@ class Customer
         return $this->attributes;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function toArray() : array
     {
         $customer = [];

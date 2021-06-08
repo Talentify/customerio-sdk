@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace CIO\Request;
 
-use CIO\ClientConfig;
 use CIO\CustomerIoClient;
 use CIO\Entity\AccountRegion;
 use CIO\Entity\Customer\Customer;
 use CIO\Entity\Customer\Identifier;
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7\Response;
+use CIO\Request\Track\Customer\AddOrUpdateCustomer;
 use Helpers\RequestTestCase;
+use Helpers\TestClient;
 
 class AddOrUpdateCustomerTest extends RequestTestCase
 {
@@ -23,25 +19,17 @@ class AddOrUpdateCustomerTest extends RequestTestCase
      */
     public function testAddOrUpdateCustomerRequest()
     {
-        $mock = new MockHandler([
-            new Response(200, [], '{}'),
-        ]);
-
-        $container    = [];
-        $handlerStack = HandlerStack::create($mock);
-        $handlerStack->push(Middleware::history($container));
-        $guzzleClient = new Client(['handler' => $handlerStack]);
+        $httpTestClient = new TestClient();
 
         $client = new CustomerIoClient(
-            'siteId',
-            'apiKey',
-            new ClientConfig(AccountRegion::US()),
-            $guzzleClient
+            'token',
+            AccountRegion::US(),
+            $httpTestClient
         );
 
         $request = new AddOrUpdateCustomer(
             new Customer(
-                new Identifier(123),
+                new Identifier("123"),
                 'email@provider.com',
                 1622554538,
                 [
@@ -54,15 +42,12 @@ class AddOrUpdateCustomerTest extends RequestTestCase
 
         $client->execute($request);
 
-        $this->assertCount(1, $container);
+        $executedRequest = $httpTestClient->getRequestsExecuted()[0];
 
-        /** @var \GuzzleHttp\Psr7\Request $request */
-        $request = $container[0]['request'];
-
-        $this->assertEquals('https://track.customer.io/api/v1/customers/123', (string)$request->getUri());
-        $this->assertEquals('PUT', (string)$request->getMethod());
+        $this->assertEquals('https://track.customer.io/api/v1/customers/123', $executedRequest['uri']);
+        $this->assertEquals('PUT', $executedRequest['method']);
         $this->assertEquals(
-            json_decode($request->getBody()->getContents(), true),
+            $executedRequest['body'],
             [
                 'email'      => 'email@provider.com',
                 'created_at' => 1622554538,
