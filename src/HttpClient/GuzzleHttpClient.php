@@ -23,6 +23,8 @@ class GuzzleHttpClient implements HttpClientInterface
      * GuzzleHttpClient constructor.
      *
      * @param mixed[] $credentials
+     *
+     * @throws \CIO\Exception\InvalidCredentials
      */
     public function __construct(array $credentials)
     {
@@ -39,7 +41,7 @@ class GuzzleHttpClient implements HttpClientInterface
                     'Authorization' => sprintf('Bearer %s', $credentials['token']),
                 ];
             } else {
-                throw new InvalidCredentials();
+                throw new InvalidCredentials('site_id and api_key or token is needed to authenticate on customer.io, please input a valid one.');
             }
         }
 

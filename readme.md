@@ -4,11 +4,16 @@ A basic php client for use customer.io.
 
 ## QuickStart
 
-Go and create a token to your workspace at: https://fly.customer.io/settings/api_credentials?keyType=app
+Go and get your credentials and create a token to your workspace at: https://fly.customer.io/settings/api_credentials?keyType=app
+
 
 ``` php
 $client = new CustomerIoClient(
-    'token',
+    [
+        'site_id' => 'string', // site_id and site_key is needed for tracking api
+        'site_key' => 'string',
+        'token' => 'string', // is needed for app and beta apis
+    ],
     AccountRegion::US()
 )
 
