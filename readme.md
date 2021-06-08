@@ -28,7 +28,6 @@ $request = new AddOrUpdateCustomer(
 );
 
 $response = $client->execute($request);
-echo $response->getStatusCode(); // 200 (I'm cheatting its a guzzle response)
 ```
 
 ## Dev
@@ -39,6 +38,4 @@ echo $response->getStatusCode(); // 200 (I'm cheatting its a guzzle response)
 ### Improvments roadmap:
 
 - [ ] request exceptions;
-- [ ] request unit tests;
-- [ ] add phpstan;
 
