@@ -6,6 +6,8 @@ namespace CIO\Response;
 
 interface CustomerIoResponse
 {
+    public function getStatusCode() : int;
+
     public function getRawBody() : string;
 
     /**

@@ -14,15 +14,12 @@ use Helpers\TestClient;
 
 class AddOrUpdateCustomerTest extends RequestTestCase
 {
-    /**
-     * todo - refactor to generic test to reuse in other requests tests as easy as possible
-     */
-    public function testAddOrUpdateCustomerRequest()
+    public function testAddOrUpdateCustomerRequest() : void
     {
         $httpTestClient = new TestClient();
 
         $client = new CustomerIoClient(
-            'token',
+            ['token' => 'token'],
             AccountRegion::US(),
             $httpTestClient
         );
