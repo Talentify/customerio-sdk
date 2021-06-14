@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace CIO\Request\Track\Customer;
+namespace CIO\Request\Beta\Customer;
 
 use CIO\Entity\Customer\Customer;
 use CIO\Entity\RequestMethod;
-use CIO\Request\Track\TrackBaseRequest;
+use CIO\Request\Beta\BetaBaseRequest;
 
-class AddOrUpdateCustomer extends TrackBaseRequest
+class GetCustomerAttributesById extends BetaBaseRequest
 {
     /**
-     * @var \CIO\Entity\Customer\Customer
+     * @var Customer
      */
     private $customer;
 
@@ -22,16 +22,16 @@ class AddOrUpdateCustomer extends TrackBaseRequest
 
     public function getEndpoint() : string
     {
-        return sprintf('/api/v1/customers/%s', $this->customer->getIdentifier());
+        return sprintf('/v1/api/customers/%s/attributes', $this->customer->getIdentifier()->getId());
     }
 
     public function getMethod() : RequestMethod
     {
-        return RequestMethod::PUT();
+        return RequestMethod::GET();
     }
 
     public function getBody() : array
     {
-        return $this->customer->toArray();
+        return [];
     }
 }
