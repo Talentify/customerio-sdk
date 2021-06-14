@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CIO\Request;
+namespace CIO\Request\Track\Customer;
 
 use CIO\CustomerIoClient;
 use CIO\Entity\AccountRegion;
