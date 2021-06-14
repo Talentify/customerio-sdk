@@ -11,18 +11,18 @@ use CIO\Request\Beta\BetaBaseRequest;
 class GetCustomerAttributesById extends BetaBaseRequest
 {
     /**
-     * @var Customer
+     * @var string
      */
-    private $customer;
+    private $customerId;
 
-    public function __construct(Customer $customer)
+    public function __construct(string $customerId)
     {
-        $this->customer = $customer;
+        $this->customerId = $customerId;
     }
 
     public function getEndpoint() : string
     {
-        return sprintf('/v1/api/customers/%s/attributes', $this->customer->getIdentifier()->getId());
+        return sprintf('/v1/api/customers/%s/attributes', $this->customerId);
     }
 
     public function getMethod() : RequestMethod
