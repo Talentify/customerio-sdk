@@ -33,7 +33,7 @@ class GetCustomerAttributesByIdTest extends RequestTestCase
             ]
         );
         $request = new GetCustomerAttributesById(
-            $customer->getIdentifier()->getId()
+            $customer->getIdentifier()
         );
 
         $client->execute($request);

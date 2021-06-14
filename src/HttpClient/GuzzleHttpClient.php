@@ -103,7 +103,7 @@ class GuzzleHttpClient implements HttpClientInterface
     private function getBearerAuth() : array
     {
         if (!isset($this->credentials['token'])) {
-            throw new InvalidCredentials('this request need site_id and api_key credentials');
+            throw new InvalidCredentials('this request need token credentials');
         }
 
         return [
