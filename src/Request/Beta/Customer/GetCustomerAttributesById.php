@@ -5,24 +5,25 @@ declare(strict_types=1);
 namespace CIO\Request\Beta\Customer;
 
 use CIO\Entity\Customer\Customer;
+use CIO\Entity\Customer\Identifier;
 use CIO\Entity\RequestMethod;
 use CIO\Request\Beta\BetaBaseRequest;
 
 class GetCustomerAttributesById extends BetaBaseRequest
 {
     /**
-     * @var Customer
+     * @var Identifier
      */
-    private $customer;
+    private $identifier;
 
-    public function __construct(Customer $customer)
+    public function __construct(Identifier $identifier)
     {
-        $this->customer = $customer;
+        $this->identifier = $identifier;
     }
 
     public function getEndpoint() : string
     {
-        return sprintf('/v1/api/customers/%s/attributes', $this->customer->getIdentifier()->getId());
+        return sprintf('/v1/api/customers/%s/attributes', $this->identifier->getId());
     }
 
     public function getMethod() : RequestMethod
