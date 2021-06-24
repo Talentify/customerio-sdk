@@ -38,9 +38,11 @@ class CustomerTest extends TestCase
 
     public function testValidEmail()
     {
+        $email = "valid@email.com";
         $identifier = new Identifier("123");
-        $customer   = new Customer($identifier, "valid@email.com");
+        $customer   = new Customer($identifier, $email);
         $this->assertInstanceOf(Customer::class, $customer);
+        $this->assertEquals(['email' => $email], $customer->toArray());
     }
 
     public function testEmailNull()
@@ -48,5 +50,6 @@ class CustomerTest extends TestCase
         $identifier = new Identifier("123");
         $customer   = new Customer($identifier, null);
         $this->assertInstanceOf(Customer::class, $customer);
+        $this->assertEquals([], $customer->toArray());
     }
 }

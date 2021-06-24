@@ -92,7 +92,7 @@ class Customer
             $customer["created_at"] = $this->getCreatedAt();
         }
 
-        if (!$this->identifier->isEmail()) {
+        if (!$this->identifier->isEmail() && !is_null($this->getEmail())) {
             $customer['email'] = $this->getEmail();
         }
 
