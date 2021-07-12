@@ -34,6 +34,7 @@ class BaseResponse implements CustomerIoResponse
 
     public function getDecodedBody() : array
     {
-        return json_decode($this->getRawBody(), true);
+        $body = json_decode($this->getRawBody(), true);
+        return $body ?? [];
     }
 }
