@@ -68,7 +68,7 @@ class GuzzleHttpClient implements HttpClientInterface
                 $options
             );
         } catch (RequestException $e) {
-            if (is_null($e->getResponse())) {
+            if (empty($e->getResponse())) {
                 throw $e;
             }
 
