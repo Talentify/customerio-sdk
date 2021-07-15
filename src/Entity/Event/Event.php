@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace CIO\Entity\Event;
 
 use CIO\Entity\Customer\Identifier;
+use CIO\Entity\EntityInterface;
 use CIO\Exception\InvalidName;
 
-class Event
+class Event implements EntityInterface
 {
     /**
      * @var \CIO\Entity\Customer\Identifier

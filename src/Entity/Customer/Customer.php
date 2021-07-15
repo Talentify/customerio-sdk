@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace CIO\Entity\Customer;
 
+use CIO\Entity\EntityInterface;
 use CIO\Exception\InvalidEmail;
 
-class Customer
+class Customer implements EntityInterface
 {
     /**
      * @var \CIO\Entity\Customer\Identifier
