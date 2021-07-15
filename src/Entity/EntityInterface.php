@@ -6,5 +6,8 @@ namespace CIO\Entity;
 
 interface EntityInterface
 {
+    /**
+     * @return mixed[]
+     */
     public function toArray() : array;
 }
