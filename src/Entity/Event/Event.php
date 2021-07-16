@@ -51,6 +51,14 @@ class Event implements EntityInterface
     /**
      * @return \CIO\Entity\Customer\Identifier
      */
+    public function getIdentifier() : Identifier
+    {
+        return $this->getCustomerIdentifier();
+    }
+
+    /**
+     * @return \CIO\Entity\Customer\Identifier
+     */
     public function getCustomerIdentifier() : Identifier
     {
         return $this->customerIdentifier;
