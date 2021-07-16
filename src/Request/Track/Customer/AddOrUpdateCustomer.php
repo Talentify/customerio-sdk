@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CIO\Request\Track\Customer;
 
 use CIO\Entity\Customer\Customer;
+use CIO\Entity\EntityInterface;
 use CIO\Entity\RequestMethod;
 use CIO\Request\Track\TrackBaseRequest;
 
@@ -15,8 +16,9 @@ class AddOrUpdateCustomer extends TrackBaseRequest
      */
     private $customer;
 
-    public function __construct(Customer $customer)
+    public function __construct(EntityInterface $customer)
     {
+        assert($customer instanceof Customer);
         $this->customer = $customer;
     }
 
