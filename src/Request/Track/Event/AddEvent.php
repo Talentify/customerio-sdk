@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CIO\Request\Track\Event;
 
-use CIO\Entity\Customer\Customer;
+use CIO\Entity\EntityInterface;
 use CIO\Entity\Event\Event;
 use CIO\Entity\RequestMethod;
 use CIO\Request\Track\TrackBaseRequest;
@@ -14,8 +14,9 @@ class AddEvent extends TrackBaseRequest
     /** @var \CIO\Entity\Event\Event */
     private $event;
 
-    public function __construct(Event $event)
+    public function __construct(EntityInterface $event)
     {
+        assert($event instanceof Event);
         $this->event = $event;
     }
 
