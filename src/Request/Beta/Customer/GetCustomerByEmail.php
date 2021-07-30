@@ -12,18 +12,18 @@ use CIO\Request\Beta\BetaBaseRequest;
 class GetCustomerByEmail extends BetaBaseRequest
 {
     /**
-     * @var Identifier
+     * @var string
      */
-    private $identifier;
+    private $email;
 
-    public function __construct(Identifier $identifier)
+    public function __construct(string $email)
     {
-        $this->identifier = $identifier;
+        $this->email = $email;
     }
 
     public function getEndpoint() : string
     {
-        return sprintf('/v1/api/customers?email=%s', $this->identifier->getId());
+        return sprintf('/v1/api/customers?email=%s', $this->email);
     }
 
     public function getMethod() : RequestMethod
