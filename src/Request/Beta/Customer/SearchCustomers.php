@@ -10,14 +10,14 @@ use CIO\Request\Beta\BetaBaseRequest;
 class SearchCustomers extends BetaBaseRequest
 {
     /**
-     * @var string
+     * @var array
      */
     private $filters;
 
     /**
-     * @param string $filters - to understand the filters array: https://customer.io/docs/api/#operation/getPeopleFilter
+     * @param array $filters - to understand the filters array: https://customer.io/docs/api/#operation/getPeopleFilter
      */
-    public function __construct(string $filters)
+    public function __construct(array $filters)
     {
         $this->filters = $filters;
     }
