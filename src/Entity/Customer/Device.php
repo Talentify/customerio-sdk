@@ -31,6 +31,9 @@ class Device
         $this->lastUsed = $lastUsed ?? null;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function toArray() : array
     {
         $device = [
