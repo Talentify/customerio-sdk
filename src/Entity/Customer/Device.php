@@ -17,11 +17,16 @@ abstract class Device
      * @var string
      */
     protected $platform;
+    /**
+     * @var int
+     */
+    protected $lastUsed;
 
     public function __construct(string $id, string $platform)
     {
         $this->id       = $id;
         $this->platform = $platform;
+        $this->lastUsed = time();
     }
 
     /**
@@ -31,8 +36,9 @@ abstract class Device
     {
         $device = [
             'device' => [
-                'id'       => $this->id,
-                'platform' => $this->platform,
+                'id'        => $this->id,
+                'platform'  => $this->platform,
+                'last_used' => $this->lastUsed,
             ],
         ];
 
