@@ -7,16 +7,16 @@ namespace CIO\Entity\Customer;
 /**
  * @see https://www.customer.io/docs/api/#operation/add_device
  */
-class Device
+abstract class Device
 {
     /**
      * @var string
      */
-    private $id;
+    protected $id;
     /**
      * @var string
      */
-    private $platform;
+    protected $platform;
 
     public function __construct(string $id, string $platform)
     {
