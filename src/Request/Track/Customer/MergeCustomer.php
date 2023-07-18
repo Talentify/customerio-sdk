@@ -39,8 +39,8 @@ class MergeCustomer extends TrackBaseRequest
     public function getBody() : array
     {
         return [
-            "primary" => ["email" => $this->newCustomer->getEmail()],
-            "secondary" => ["email" => $this->oldCustomer->getEmail()]
+            "primary" => ["email" => $this->newCustomer->getAttributes()['email']],
+            "secondary" => ["email" => $this->oldCustomer->getAttributes()['email']]
         ];
     }
 }
